@@ -75,16 +75,148 @@ result = resize(color_image, (column, row))
 imshow(result)</p>
   <h2>المشروع الثاني</h2>
   <p>:الكود الاول</p>
-  <p></p>
+  <p>#الخطوة الأولى هي قراءة الصورة التي بها عيوب وتخزينها في متغير 
+noised_img = get_image("female_noise3.jpg") 
+#قمنا بعرض الصورة بعد استدعائها 
+imshow(noised_img, "noised img")
+#لإصلاح العيوب في الصورة استخدمنا فلتر المتوسط 
+mean_kernel = [ 
+[1/9, 1/9, 1/9], 
+[1/9, 1/9, 1/9], 
+[1/9, 1/9, 1/9] 
+] 
+#هنا استدعينا الصورة بعد اصلاح العيوب التي بها وإظهار النتيجة
+img_mean = filter_2d(noised_img, mean_kernel)
+imshow(img_mean, "repired by the mean kernel")
+#نستخدم فلتر آخر يسمى فلتر غاليسيان فلتر ونظهر الصورة بعد تطبيق الفلتر 
+gaussian_kernel = [ 
+[1/16, 2/16, 1/16], 
+[1/16, 4/16, 2/16], 
+[1/16, 2/16, 1/16] 
+] 
+#هنا أظهرنا الصورة بعد تطبيق الفلتر
+img_gauss = filter_2d(noised_img, gaussian_kernel) 
+imshow(img_gauss, "repired by the Gaussian kernel")
+imlist_show([noised_img, img_mean, img_gauss])</p>
   <p>:الكود الثاني</p>
-  <p></p>
+  <p>#هنا استدعينا الصورة 
+color_img = get_image("c_book.jpg") 
+imshow(color_img) 
+
+
+#هنا تطبيق للفلتر الأول   Longitudinal edge convolution kernel
+l_edge_kernel = [ 
+[1, 0, -1], 
+[1, 0, -1], 
+[1, 0, -1] 
+] 
+l_edge_img = filter_2d(color_img, l_edge_kernel) 
+imshow(l_edge_img, "l edge image")
+#هنا تطبيق للفلتر الثاني   Transverse edge convolution kernel
+
+t_edge_kernel = [ 
+[1, 1, 1], 
+[0, 0, 0], 
+[-1, -1, -1] 
+] 
+t_edge_img = filter_2d(color_img, t_edge_kernel) 
+imshow(t_edge_img, "t edge image")
+#هنا تطبيق للفلتر الثالث   Edge convolution kernel
+edge_kernel = [ 
+[-1, -1, -1], 
+[-1, 8, -1], 
+[-1, -1, -1] 
+] 
+edge_img = filter_2d(color_img, edge_kernel) 
+imshow(edge_img, "edge image")</p>
   <p>:الكود الثالث</p>
-  <h2>المشروع الثالث</h2>
+  <p>#قممنا يتحميل الصورة ون ثم استداءها وتخزينها في متغير ومن ثم اظهارها
+img = get_image("http://sensestudy-server.edu/api/resource/public/accountstorage-objs/bb4a6f67-9c62-4640-b9c2-12b36792ab4c/صورة تطبق عليها الفلاتر.jpeg.jpg") 
+imshow(img) 
+#تطبيق الفلتر الذي يركز على الحواف بشكل عام
+edge_kernel = [ 
+[-1, -1, -1], 
+[-1, 8, -1], 
+[-1, -1, -1] 
+] 
+edge_img = filter_2d(img, edge_kernel) 
+imshow(edge_img, "dege image")
+#تطبيق فلتر يقوم بتحويل الطورة إلى صورة سلبية أو رسم بقلم الرصاص 
+sketch_image = 255 - edge_img 
+imshow(sketch_image, "sketch effect")</p>
+ <p>:الكود الرابع</p>
+ <p>gray_img = get_image("female_noise3.jpg", fmt = "gray") 
+
+imshow(gray_img) 
+
+edge_kernel = [ 
+
+[-1, -1, -1], 
+
+[-1, 8, -1], 
+
+[-1, -1, -1] 
+
+] 
+
+edge_img = filter_2d(gray_img, edge_kernel) 
+
+imshow(edge_img, "edge image")
+
+sketch_image = 255 - edge_img 
+
+imshow(sketch_image, "sketch effect")</p>
+ <h2>المشروع الثالث</h2>
   <p>:الكود الاول</p>
-  <p></p>
+  <p># أولا تحميل مجموعة البيانات الخاصة بالحيوانات
+x, y = load_animals('train')
+#طباعة عدد البايات الموجودة في قاعدة البيانات
+print(len(x))
+#الحصول على صورة واحدة من الصور الموجودة في القاعدة والتي رقمها 50
+id = 50
+img = x[id]
+# عرض تلك الصورة 
+imshow(img, 'Raw image')
+
+# استخدام ميزة  HOG على صورة واحدة من الصور في القاعدة
+#حجم الخلية لهذه الميزه هو 8
+hog_img = get_hog_img(img, cell_size = 8, resize = False)
+imlist_show([img, hog_img], ['Raw image', 'HOG image cell_size = 8'])
+ #استخدام ميزة  HOG على صورة واحدة من الصور في القاعدة
+#حجم الخلية لهذه الميزه هو 16 
+hog_img = get_hog_img(img, cell_size = 16, resize = False)
+imlist_show([img, hog_img], ['Raw image', 'HOG image cell_size = 16'])
+# استخدام ميزة  HOG على صورة واحدة من الصور في القاعدة
+#حجم الخلية لهذه الميزه هو 64
+hog_img = get_hog_img(img, cell_size = 64, resize = False)
+imlist_show([img, hog_img], ['Raw image', 'HOG image cell_size = 64'])</p>
   <p>:الكود الثاني</p>
-  <p></p>
+  <p>img=get_image("")
+imshow(img)
+# استخدام ميزة  HOG على صورة واحدة من الصور في القاعدة
+#حجم الخلية لهذه الميزه هو 8
+hog_img = get_hog_img(img, cell_size = 8, resize = False)
+imlist_show([img, hog_img], ['Raw image', 'HOG image cell_size = 8'])
+
+# استخدام ميزة  HOG على صورة واحدة من الصور في القاعدة
+#حجم الخلية لهذه الميزه هو 16 
+hog_img = get_hog_img(img, cell_size = 16, resize = False)
+imlist_show([img, hog_img], ['Raw image', 'HOG image cell_size = 16'])
+# استخدام ميزة  HOG على صورة واحدة من الصور في القاعدة
+#حجم الخلية لهذه الميزه هو 64
+hog_img = get_hog_img(img, cell_size = 64, resize = False)
+imlist_show([img, hog_img], ['Raw image', 'HOG image cell_size = 64'])</p>
   <p>:الكود الثالث</p>
+  <p>hog_img = get_hog_img(img, cell_size = 16, resize = False)
+imlist_show([img, hog_img], ['Raw image', 'HOG image cell_size = 16'])
+hog_img = get_hog_img(img, cell_size = 64, resize = False)
+imlist_show([img, hog_img], ['Raw image', 'HOG image cell_size = 64'])
+
+img1 = resize(img, (224, 224))
+hog_img1 = get_hog_img(img1, cell_size = 8, resize =False)
+imlist_show([img1, hog_img1], ['Resize image', 'Hog image cell_size = 8'])
+hog_img2 = get_hog_img(img1, cell_size = 16, resize =False)
+imlist_show([img1, hog_img2], ['Resize image', 'Hog image cell_size = 16'])</p>
   <!-- Project -->
 </body>
 </html>
