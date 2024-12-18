@@ -36,24 +36,27 @@ html {
 <body>
   <h2>المشروع الاول</h2>
   <p>:الكود الاول</p>
-  <p>#في هذا السطر البرمجي سنقوم بقراءة الصورة الرمادية
-gray_image = get_image("female1.jpg", fmt = "gray")
-#هذه التعليمة البرمجة تعني عرض هذه الصورة بتدرج الرمادي على المنصة
-imshow(gray_image)
-#هذه التعليمة البرمجية تعني تكبير الصورة وعرض قيمة شبكة البيكسلات التي تتكون منها الصورة 
-print(f"gray image shape is：{gray_image.shape}")
-#في هذه الخطوة نحدد احداثيات لشبكة من البكسلات نختارها من الصورة ونعرض قيمها ضمن صفحة النتائج
-show_crop_pixels(gray_image, x_min = 573, y_min = 230)</p>
+  <p>mosq=pd.read_excel("")
+
+print(mosq)
+
+mosq_train, mosq_test = train_test_split(mosq, test_size=0.2, random_state=0)
+
+model = LinearRegression() model.fit(mosq_train[['rain(m m)','mean_T(°C)', 'max_T(°C)']], mosq_train['mosquito_Indicator'])
+
+mosq_train_pred = model.predict(mosq_train[['rain(mm )",mean_T(°C),max_T(°C)]])
+
+print('training error') print(mean_squared_error(mo sq_train['mosquito_Indicator'], mosq_train_pred))
+
+k = model.coef_ b = model.intercept_ print('k=', k, 'b=', b)
+
+mosq_test_pred = model.predict(m osq_test[['rain(mm)',mean_T(°C)',
+
+'max_T(°C)]]) print('test error') print(mean_squared_error(m osq_test['mosquito_Indicator'], mosq_test_pred))
+
+m = [10, 20, 32] m[2] * k[2] + b result = m[0] * k[0]+m[1]*k[1] + print('the model predict mosquito_indicator is', result)</p>
   <p>:الكود الثاني</p>
-  <p>#في هذا السطر البرمجي سنقوم بقراءة الصورة الملونة
-color_image = get_image("female1.jpg")
-#هذه التعليمة البرمجة تعني عرض هذه الصورة الملونة على المنصة
-imshow(color_image)
-#هذه التعليمة البرمجية تعني تكبير الصورة وعرض قيمة شبكة البيكسلات التي تتكون منها الصورة 
-print(f"color image shape is：{color_image.shape}")
-#في هذه الخطوة نحدد احداثيات لشبكة من البكسلات نختارها من الصورة ونعرض قيمها ضمن صفحة النتائج وقد كان اختيار البيكسلات من مكانين مختلفين
-show_crop_pixels(color_image, x_min = 317, y_min = 253) 
-show_crop_pixels(color_image, x_min = 466, y_min = 539)</p>
+  <p></p>
   <p>:الكود الثالث</p>
   <p>#في هذه التعليمات هناك ثلاث خطوت نطبقها 
 #الخطوة الأولى هي قراءة الصورة الملونة وعرضها
